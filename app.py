@@ -8,11 +8,13 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 app.title = "Allura Enterprise"
 
-# --- 1. CSS ANIMATIONS (Inline Injection) ---
+# --- 1. CSS ANIMATIONS & RESPONSIVENESS ---
 app.index_string = '''
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {%metas%}
         <title>{%title%}</title>
         {%favicon%}
@@ -33,6 +35,38 @@ app.index_string = '''
             .hover-card:hover {
                 transform: scale(1.03);
                 z-index: 5;
+            }
+
+            /* --- MOBILE FIXES --- */
+            @media (max-width: 768px) {
+                .top-bar { display: none !important; } /* Hide green top bar on mobile */
+                
+                .nav-bar { 
+                    padding: 10px 20px !important; 
+                    flex-direction: column !important;
+                    height: auto !important;
+                }
+                
+                .nav-links { 
+                    margin: 15px 0 !important; 
+                    text-align: center;
+                    font-size: 14px;
+                }
+
+                .hero-text {
+                    font-size: 32px !important; /* Smaller headline for mobile */
+                    text-align: center;
+                }
+
+                .hero-container {
+                    padding: 60px 20px !important;
+                    text-align: center;
+                }
+
+                .footer-col {
+                    margin-bottom: 40px;
+                    text-align: center;
+                }
             }
         </style>
     </head>
@@ -132,9 +166,9 @@ app.layout = html.Div([
     # Header
     html.Div([
         html.Div([
-            html.Span("📍 Legazpi | Cavite"),
+            html.Span("📍 BGC, Taguig City, Philippines"),
             html.Span("📞 +63 917 770 1820"),
-            html.Span("✉️ allura.enterprise@gmail.com"),
+            html.Span("✉️ info@alluraenterpriseph.com"),
         ], style=TOP_BAR_STYLE),
         html.Div([
             html.Img(src=app.get_asset_url('1_logo.jpg'), style={"height": "70px"}),
@@ -168,7 +202,7 @@ app.layout = html.Div([
             ])
         ], style={"padding": "120px 0"})
     ], style={
-        "backgroundImage": "linear-gradient(to right, rgba(255,255,255,1) 40%, rgba(255,255,255,0) 100%), url('/assets/2_coverphoto.jpg')",
+        "backgroundImage": "linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%), url('/assets/2_coverphoto03.jpg')",
         "backgroundSize": "cover", "backgroundPosition": "center"
     }),
 
